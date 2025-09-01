@@ -1,0 +1,614 @@
+<!DOCTYPE-html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdirahman Mohamoud - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --text-dark: #f1f5f9;
+            --card-dark: #1e293b;
+            --accent-color: #38bdf8;
+            --bg-light: #f1f5f9;
+            --text-light: #0f172a;
+            --card-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            scroll-behavior: smooth;
+        }
+
+        .dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .light-mode {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        .light-mode .header,
+        .light-mode .footer {
+            background-color: var(--card-light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .navigation a {
+            color: var(--text-light);
+        }
+
+        .light-mode .cta-button,
+        .light-mode .project-link,
+        .light-mode .contact-form button {
+            color: var(--text-light);
+            border: 2px solid var(--accent-color);
+            background: none;
+        }
+
+        .light-mode .project-card,
+        .light-mode .skill-card {
+            background-color: var(--card-light);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Base Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header/Navigation */
+        .header {
+            padding: 20px 0;
+            background-color: var(--bg-dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin: 0;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        
+        .logo .accent-name {
+            color: var(--accent-color);
+        }
+
+        .navigation a {
+            color: var(--text-dark);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .navigation a i {
+            margin-right: 8px;
+        }
+
+        .navigation a:hover,
+        .navigation a.active {
+            color: var(--accent-color);
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .navigation a:hover::after,
+        .navigation a.active::after {
+            transform: scaleX(1);
+        }
+
+        /* Sections */
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.5rem;
+            max-width: 800px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-dark);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* About Me */
+        .about-me-section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .skill-card {
+            background-color: var(--card-dark);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .skill-card i {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background-color: var(--card-dark);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .project-links {
+            margin-top: 15px;
+        }
+
+        .project-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .contact-email a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background-color: var(--card-dark);
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .light-mode .contact-form input,
+        .light-mode .contact-form textarea {
+            background-color: var(--card-light);
+            color: var(--text-light);
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background-color: var(--accent-color);
+            color: var(--bg-dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #2b99d5;
+        }
+
+        .social-links a {
+            color: var(--text-dark);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .light-mode .social-links a {
+            color: var(--text-light);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px 0;
+            background-color: var(--bg-dark);
+            text-align: center;
+            border-top: 1px solid var(--card-dark);
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navigation {
+                margin-top: 10px;
+            }
+
+            .navigation a {
+                margin: 0 10px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Abdirahman <span class="accent-name">Mohamoud</span></h1>
+            <nav class="navigation">
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#about"><i class="fas fa-user"></i> About</a>
+                <a href="#services"><i class="fas fa-briefcase"></i> Services</a>
+                <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+                <a href="#portfolio"><i class="fas fa-folder"></i> Portfolio</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2 class="hero-title">Frontend Developer | React & Tailwind</h2>
+                <p class="hero-description">I am a frontend developer specializing in creating modern, user-friendly web applications. I use React and Tailwind to build dynamic and highly functional interfaces.</p>
+                <a href="#portfolio" class="cta-button">View My Work</a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about">
+            <div class="container">
+                <img src="image/profile.jpg" alt="Profile Picture" class="profile-picture">
+                <div class="about-text">
+                    <h3 class="section-title">About Me</h3>
+                    <p>My name is Abdirahman Mohamoud. I am a web developer with years of experience building websites. My goal is to create high-quality web applications that solve real-world problems. I am constantly learning new technologies to improve my skills and provide the best solutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="container">
+                <h3 class="section-title">Services</h3>
+                <hel><p>I offer a range of services from custom web development to UI/UX design.<br>
+                    Let me help you bring your ideas to life with clean, efficient, and modern web solutions.</p></hel>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="container">
+                <h3 class="section-title">Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fab fa-html5 fa-2x"></i>
+                        <span>HTML</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-css3-alt fa-2x"></i>
+                        <span>CSS</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-js fa-2x"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-react fa-2x"></i>
+                        <span>React</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-reacteurope fa-2x"></i>
+                        <span>Tailwind</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa fa-palette fa-2x"></i>
+                        <span>Figma</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <div class="container">
+                <h3 class="section-title">Portfolio</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="image/to do list.jpg" alt="To-Do List App">
+                        <h4>To-Do List App</h4>
+                        <p>A sleek and modern to-do list application for managing tasks efficiently. It features a clean user interface with options to sort tasks by categories and priorities.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="image/climate.jpg" alt="Weather App">
+                        <h4>Weather App</h4>
+                        <p>A dynamic weather application that provides real-time weather data and a 7-day forecast. The intuitive design makes it easy to check the current conditions and plan ahead.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="image/blog app.jpg" alt="Blog App">
+                        <h4>Blog App</h4>
+                        <p>A fully functional blog platform designed for content creators. The app includes a user-friendly interface for reading articles and a robust backend for content management.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h3 class="section-title">Contact Me</h3>
+                <div class="contact-content">
+                    <p class="contact-email">Email: <a href="mailto:maniirahoo33@gmail.com">maniirahoo33@gmail.com</a></p>
+                    <form class="contact-form" onsubmit="return false;">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" placeholder="Message" required></textarea>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github fa-2x"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p id="copyright-year">&copy; 2024 Abdirahman Mohamoud</p>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scroll for navigation links
+            document.querySelectorAll('.navigation a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navigation a');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                rootMargin: '-50% 0px -50% 0px'
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Dynamic copyright year
+            const copyrightYear = document.getElementById('copyright-year');
+            const currentYear = new Date().getFullYear();
+            copyrightYear.textContent = `© ${currentYear} Abdirahman Mohamoud`;
+        });
+    </script>
+</body>
+</html>
